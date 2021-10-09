@@ -1,17 +1,33 @@
 package us.happypockets.skream;
 
+import ch.njol.skript.Skript;
+import ch.njol.skript.SkriptAddon;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 
 public final class Skream extends JavaPlugin {
 
-    @Override
-    public void onEnable() {
-        // Plugin startup logic
+    Skream instance;
+    SkriptAddon addon;
 
+    public void onEnable() {
+        instance = this;
+        addon = Skript.registerAddon(this);
+        try {
+            addon.loadClasses("us.happypockets.skream", "elements");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bukkit.getLogger().info("[Skream] has been enabled!");
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    public Skream getInstance() {
+        return instance;
+    }
+
+    public SkriptAddon getAddonInstance() {
+        return addon;
     }
 }
