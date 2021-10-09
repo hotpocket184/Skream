@@ -77,7 +77,7 @@
             <artifactId>Skript</artifactId>
             <scope>system</scope>
             <version>2.5.3</version>
-            <systemPath>C:/Users/madli/Downloads/Skript.jar</systemPath>
+            <systemPath>C:/Users/ryanb/Desktop/Gaming/Minecraft/Skripts/Skript.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
