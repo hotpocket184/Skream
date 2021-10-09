@@ -4,6 +4,7 @@ import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
+import org.bukkit.Bukkit;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,8 +16,13 @@ public class TypTeam {
                 .parser(new Parser<Team>() {
                     @Override
                     @Nullable
-                    public Team parse(String team, ParseContext context) {
-                        return null;
+                    public boolean canParse(ParseContext context) {
+                        return true;
+                    }
+                    @Override
+                    @Nullable
+                    public Team parse(String s, ParseContext pc){
+                        return Bukkit.getScoreboardManager().getMainScoreboard().getTeam(s);
                     }
                     @Override
                     public String toString(Team team, int flags) {
@@ -27,7 +33,7 @@ public class TypTeam {
                         return team.toString();
                     }
                     public String getVariableNamePattern() {
-                        return ".+";
+                        return ".*";
                     }}));
     }
 }

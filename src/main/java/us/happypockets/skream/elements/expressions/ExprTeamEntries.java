@@ -10,11 +10,11 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 @Name("Entries of Team")
 @Description({"Gets all of the entries in the specified team."})
 @Examples("broadcast \"%team entries of \"\"happypockets\"\"%\"")
@@ -35,7 +35,7 @@ public class ExprTeamEntries extends SimpleExpression<String> {
 
     @Override
     public boolean isSingle() {
-        return true;
+        return false;
     }
 
     @Override
@@ -53,7 +53,11 @@ public class ExprTeamEntries extends SimpleExpression<String> {
     @Nullable
     protected String[] get(Event event) {
         if (team.getSingle(event) != null) {
-            return new String[]{String.valueOf(team.getSingle(event).getEntries())};
+            ArrayList<String> entries = new ArrayList<>();
+            for(String e : team.getSingle(event).getEntries()){
+                entries.add(e);
+            }
+            return entries.toArray(new String[entries.size()]);
         }
         return null;
     }
