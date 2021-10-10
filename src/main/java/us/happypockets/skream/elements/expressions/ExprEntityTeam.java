@@ -22,17 +22,17 @@ import org.jetbrains.annotations.Nullable;
 @Examples("broadcast \"%team of player%\"")
 @Since("1.0")
 
-public class ExprEntityTeam extends SimpleExpression<Team> {
+public class ExprEntityTeam extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprEntityTeam.class, Team.class, ExpressionType.COMBINED, "team of %entities%");
+        Skript.registerExpression(ExprEntityTeam.class, String.class, ExpressionType.COMBINED, "team of %entities%");
     }
 
     private Expression<Entity> entity;
 
     @Override
-    public Class<? extends Team> getReturnType() {
-        return Team.class;
+    public Class<? extends String> getReturnType() {
+        return String.class;
     }
 
     @Override
@@ -53,19 +53,19 @@ public class ExprEntityTeam extends SimpleExpression<Team> {
 
     @Override
     @Nullable
-    protected Team[] get(Event event) {
+    protected String[] get(Event event) {
         if (entity != null) {
             for(Entity e : entity.getAll(event)){
                 for(Team team : Bukkit.getScoreboardManager().getMainScoreboard().getTeams()){
                     if(e.getType() == EntityType.PLAYER) {
                         if(team.hasEntry(e.getName())) {
-                            return new Team[]{team};
+                            return new String[]{team.getName()};
                         }
 
                     }
                     if(!(e.getType() == EntityType.PLAYER)){
                         if(team.hasEntry(String.valueOf(e.getUniqueId()))) {
-                            return new Team[]{team};
+                            return new String[]{team.getName()};
                         }
                     }
                 }
