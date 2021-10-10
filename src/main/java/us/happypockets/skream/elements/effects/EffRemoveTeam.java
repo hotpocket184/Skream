@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Name("Remove Entity from Team")
 @Description({"Removes an entity from a team.", "NOTE: Entities are removed from the team via their ID and players are removed via their name."})
-@Examples("remove player from team \"red\"")
+@Examples("remove player from team red")
 @Since("1.0")
 
 public class EffRemoveTeam extends Effect {
@@ -40,7 +40,7 @@ public class EffRemoveTeam extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Removes an entity from a team";
+        return "Remove entity from team effect with expression entity: " + entity.toString(event, debug) + " and expression team: " + team.toString(event, debug);
     }
 
     @Nullable

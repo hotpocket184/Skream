@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Name("Add Entity to Team")
 @Description({"Adds an entity to a team.", "NOTE: Entities are added to the team via their ID and players are added via their name."})
-@Examples("add player to team \"red\"")
+@Examples("add player to team red")
 @Since("1.0")
 
 public class EffAddTeam extends Effect {
@@ -40,7 +40,7 @@ public class EffAddTeam extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Adds an entity to a team";
+        return "Add entity to team effect with expression entity: " + entity.toString(event, debug) + " and expression team: " + team.toString(event, debug);
     }
 
     @Nullable

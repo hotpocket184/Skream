@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Name("Suffix of Team")
 @Description({"Sets/gets the prefix of the specified team."})
-@Examples({"set suffix of team \"team\" to \"happypockets\"", "broadcast \"%suffix of team \"\"happypockets\"\"%\""})
+@Examples({"set suffix of team red to \"happypockets\"", "broadcast \"%suffix of team happypockets%\""})
 @Since("1.0")
 
 public class ExprTeamSuffix extends SimpleExpression<String> {
@@ -48,7 +48,7 @@ public class ExprTeamSuffix extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Allows you to get the suffix of a team & set it.";
+        return "Suffix of team expression with expression team: " + team.toString(event, debug);
     }
 
     @Override

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Name("Delete/Unregister Team")
 @Description({"Unregisters/Deletes a team"})
-@Examples("unregister team \"red\"")
+@Examples("unregister team red")
 @Since("1.0")
 
 public class EffDelTeam extends Effect {
@@ -36,7 +36,7 @@ public class EffDelTeam extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Unregisters a team";
+        return "Unregister team effect with expression team: " + team.toString(event, debug);
     }
 
     @Override

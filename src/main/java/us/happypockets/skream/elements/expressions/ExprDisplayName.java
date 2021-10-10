@@ -12,14 +12,13 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Display Name of Team")
 @Description({"Sets/gets the display-name of the specified team shown in /team list.", "NOTE: The original name of the team will still need to be used when modifying the team in any way."})
-@Examples("set display name of team \"team\" to \"happypockets\", broadcast \"%displayname of team \"\"happypockets\"\"%\"")
+@Examples("set display name of team red to \"happypockets\", broadcast \"%displayname of team red%\"")
 @Since("1.0")
 
 public class ExprDisplayName extends SimpleExpression<String> {
@@ -48,7 +47,7 @@ public class ExprDisplayName extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Allows you to get the display-name of a team & set it.";
+        return "Display-name expression with expression team: " + team.toString(event, debug);
     }
 
     @Override

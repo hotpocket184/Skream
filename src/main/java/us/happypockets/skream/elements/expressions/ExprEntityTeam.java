@@ -48,7 +48,7 @@ public class ExprEntityTeam extends SimpleExpression<Team> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Allows you to get the team of an entity.";
+        return "Team of entity expression with expression entity: " + entity.toString(event, debug);
     }
 
     @Override
