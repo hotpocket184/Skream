@@ -11,23 +11,21 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-@Name("Entries of Team")
-@Description({"Returns a list containing the entries in the specified team. (Loop-able)"})
-@Examples("broadcast \"%entries of team happypockets%\"")
+@Name("All Teams")
+@Description({"Returns a list containing the teams. (Loop-able)"})
+@Examples({"broadcast \"%all teams%\"", "set {_} to a random element out of all teams", "loop all teams:"})
 @Since("1.0")
 
-public class ExprRandomTeam extends SimpleExpression<String> {
+public class ExprAllTeams extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprRandomTeam.class, String.class, ExpressionType.COMBINED, "(random team|random element [out] of [all] teams)");
+        Skript.registerExpression(ExprAllTeams.class, String.class, ExpressionType.COMBINED, "[all] teams");
     }
 
     @Override
@@ -47,7 +45,7 @@ public class ExprRandomTeam extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Returns a random team";
+        return "Returns a list of teams";
     }
 
     @Override
@@ -58,11 +56,11 @@ public class ExprRandomTeam extends SimpleExpression<String> {
             teams.add(team.getName());
         }
         if(teams.size() > 0){
-            int num = (int)(Math.random() * teams.size());
-            return new String[]{teams.get(num)};
+            return teams.toArray(new String[teams.size()]);
         }
         else{
             return null;
         }
     }
 }
+
