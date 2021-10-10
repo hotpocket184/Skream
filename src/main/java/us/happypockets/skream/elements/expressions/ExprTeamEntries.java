@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 @Name("Entries of Team")
-@Description({"Gets all of the entries in the specified team."})
-@Examples("broadcast \"%team entries of \"\"happypockets\"\"%\"")
+@Description({"Returns a list containing the entries in the specified team. (Loop-able)"})
+@Examples("broadcast \"%entries of team happypockets%\"")
 @Since("1.0")
 
 public class ExprTeamEntries extends SimpleExpression<String> {
@@ -46,7 +46,7 @@ public class ExprTeamEntries extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Allows you to get the entries of a team.";
+        return "Entries of team expression with expression team: " + team.toString(event, debug);
     }
 
     @Override

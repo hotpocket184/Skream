@@ -15,8 +15,8 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Size of Team")
-@Description({"Gets the size of the specified team."})
-@Examples("broadcast \"%team size of \"\"happypockets\"\"%\"")
+@Description({"Returns the integer value of the size of the specified team."})
+@Examples("broadcast \"%size of team happypockets%\"")
 @Since("1.0")
 
 public class ExprTeamSize extends SimpleExpression<Integer> {
@@ -44,7 +44,7 @@ public class ExprTeamSize extends SimpleExpression<Integer> {
     }
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Allows you to get the size of a team.";
+        return "Size of team expression with expression team: " + team.toString(event, debug);
     }
     @Override
     @Nullable

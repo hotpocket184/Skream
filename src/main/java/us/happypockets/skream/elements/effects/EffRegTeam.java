@@ -35,13 +35,15 @@ public class EffRegTeam extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Registers a team";
+        return "Register team effect with expression team: " + team.toString(event, debug);
     }
 
     @Override
     protected void execute(Event event) {
         if(team != null){
-            Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(team.getSingle(event));
+            if(!(team.getSingle(event).contains(" "))){
+                Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(team.getSingle(event));
+            }
         }
     }
 }
