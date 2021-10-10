@@ -8,6 +8,7 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,16 +17,16 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Checks when a player gets an advancement."})
 @Examples({"on advancement complete:"})
 
-public abstract class EvntOnAdvancement extends SkriptEvent {
+public abstract class EvntOnAdvancement extends SimpleEvent {
 
     static {
         Skript.registerEvent("On Advancement", SimpleEvent.class, PlayerAdvancementDoneEvent.class, "[on] [player] advancement (complete|done)");
 
-        EventValues.registerEventValue(PlayerAdvancementDoneEvent.class, String.class, new Getter<String, PlayerAdvancementDoneEvent>() {
+        EventValues.registerEventValue(PlayerAdvancementDoneEvent.class, NamespacedKey.class, new Getter<NamespacedKey, PlayerAdvancementDoneEvent>() {
             @Override
             @Nullable
-            public String get(PlayerAdvancementDoneEvent e) {
-                return e.getAdvancement().getKey().getKey();
+            public NamespacedKey get(PlayerAdvancementDoneEvent e) {
+                return NamespacedKey.minecraft(e.getAdvancement().getKey().getKey());
             }
 
         }, 0);
