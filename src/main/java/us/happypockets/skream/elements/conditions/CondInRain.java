@@ -21,27 +21,27 @@ import org.jetbrains.annotations.Nullable;
 public class CondInRain extends Condition {
 
     static {
-        Skript.registerCondition(CondInRain.class, "%entities% (1¦is|2¦is(n't| not)) in rain");
+        Skript.registerCondition(CondInRain.class, "%entity% (1¦is|2¦is(n't| not)) in rain");
     }
 
-    Expression<Entity> entities;
+    Expression<Entity> entity;
 
     @SuppressWarnings({ "unchecked", "null" })
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
-        this.entities = (Expression<Entity>) expressions[0];
+        this.entity = (Expression<Entity>) expressions[0];
         setNegated(parser.mark  == 1);
         return true;
     }
 
     @Override
     public @NonNull String toString(@Nullable Event event, boolean debug) {
-        return "Entity in rain " + entities.toString(event, debug);
+        return "Entity in rain " + entity.toString(event, debug);
     }
 
     @Override
     public boolean check(@NonNull Event event) {
-        Entity e = entities.getSingle(event);
+        Entity e = entity.getSingle(event);
         if (e == null) return isNegated();
         return e.isInRain() ? isNegated() : !isNegated();
     }

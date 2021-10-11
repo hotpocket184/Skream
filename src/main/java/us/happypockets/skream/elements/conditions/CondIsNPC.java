@@ -18,10 +18,10 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Checks if the specified entity/entities is/are in water."})
 @Examples({"if player is in water:"})
 
-public class CondInWater extends Condition {
+public class CondIsNPC extends Condition {
 
     static {
-        Skript.registerCondition(CondInWater.class, "%entity% (1¦is|2¦is(n't| not)) in water");
+        Skript.registerCondition(CondIsNPC.class, "%entity% (1¦is|2¦is(n't| not)) [a] npc");
     }
 
     Expression<Entity> entity;
@@ -36,13 +36,14 @@ public class CondInWater extends Condition {
 
     @Override
     public @NonNull String toString(@Nullable Event event, boolean debug) {
-        return "Entity in water " + entity.toString(event, debug);
+        return "Entity is npc " + entity.toString(event, debug);
     }
 
     @Override
     public boolean check(@NonNull Event event) {
         Entity e = entity.getSingle(event);
         if (e == null) return isNegated();
-        return e.isInWater() ? isNegated() : !isNegated();
+        return e.hasMetadata("NPC") ? isNegated() : !isNegated();
     }
 }
+
