@@ -10,6 +10,7 @@ import org.bukkit.scoreboard.Team;
 public class TypTeam {
     static{
         Classes.registerClass(new ClassInfo<Team>(Team.class, "team")
+                .user("teams?")
                 .name("Team")
                 .description("Vanilla team")
                 .parser(new Parser<Team>() {
@@ -31,7 +32,7 @@ public class TypTeam {
                     }
                     @Override
                     public String getVariableNamePattern() {
-                        return ".*";
+                        return ".+";
                     }}));
     }
 }
