@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class EffDeleteNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "delete npc [with] [the] [id] %integer%");
+        Skript.registerEffect(EffDeleteNPC.class, "delete npc [with] [the] [id] %integers%");
     }
 
     private Expression<Integer> id;
@@ -43,7 +43,11 @@ public class EffDeleteNPC extends Effect {
     @Override
     protected void execute(Event event) {
         NPCRegistry reg = CitizensAPI.getNPCRegistry();
-        NPC npc = reg.getById(id.getSingle(event));
-        npc.destroy();
+        NPC npc;
+        for(Integer i : id.getAll(event)){
+            npc = reg.getById(i);
+            npc.destroy();
+        }
+
     }
 }
