@@ -12,6 +12,7 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
+import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,24 +21,26 @@ import org.jetbrains.annotations.Nullable;
 @Examples("register team \"red\"")
 @Since("1.0")
 
-public class EffDeleteNPC extends Effect {
+public class EffRespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc [with] [the] [id] %integers%");
+        Skript.registerEffect(EffRespawnNPC.class, "respawn npc [with] [the] [id] %integers% at %location%");
     }
 
     private Expression<Integer> id;
+    private Expression<Location> loc;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
         this.id = (Expression<Integer>) expressions[0];
+        this.loc = (Expression<Location>) expressions[1];
         return true;
     }
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Delete npc effect with expression integer: " + id.toString(event, debug);
+        return "Respawn npc effect with expression integer: " + id.toString(event, debug) + " and with expression location: " + loc.toString(event, debug);
     }
 
     @Override
@@ -46,7 +49,7 @@ public class EffDeleteNPC extends Effect {
         NPC npc;
         for(Integer i : id.getAll(event)){
             npc = reg.getById(i);
-            npc.destroy();
+            npc.spawn(loc.getSingle(event));
         }
 
     }

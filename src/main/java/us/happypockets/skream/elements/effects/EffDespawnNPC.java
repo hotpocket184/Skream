@@ -20,10 +20,10 @@ import org.jetbrains.annotations.Nullable;
 @Examples("register team \"red\"")
 @Since("1.0")
 
-public class EffDeleteNPC extends Effect {
+public class EffDespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc [with] [the] [id] %integers%");
+        Skript.registerEffect(EffDespawnNPC.class, "de[ |-]spawn npc [with] [the] [id] %integers%");
     }
 
     private Expression<Integer> id;
@@ -37,7 +37,7 @@ public class EffDeleteNPC extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Delete npc effect with expression integer: " + id.toString(event, debug);
+        return "Despawn npc effect with expression integer: " + id.toString(event, debug);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EffDeleteNPC extends Effect {
         NPC npc;
         for(Integer i : id.getAll(event)){
             npc = reg.getById(i);
-            npc.destroy();
+            npc.despawn();
         }
 
     }

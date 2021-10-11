@@ -12,7 +12,6 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
@@ -28,7 +27,7 @@ import us.happypockets.skream.util.ScrubEntityType;
 public class EffSpawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffSpawnNPC.class, "spawn [a] npc named %string% at %location% [as %entitytype%]");
+        Skript.registerEffect(EffSpawnNPC.class, "(spawn|create) [a] npc named %string% at %location% [as %entitytype%]");
     }
 
     private Expression<String> name;

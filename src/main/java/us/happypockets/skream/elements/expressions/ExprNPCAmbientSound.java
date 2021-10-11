@@ -12,26 +12,28 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.Player;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.ScrubNPCSound;
 
-@Name("Sneak State of Player")
-@Description({"Sets/gets the sneak state of the specified player(s)"})
-@Examples({"set sneak state of player to true", "broadcast \"sneak state of player\""})
+@Name("Prefix of Team")
+@Description({"Sets/gets the prefix of the specified team."})
+@Examples({"set prefix of team red to \"happypockets\"", "broadcast \"%prefix of team happypockets%\""})
 @Since("1.0")
 
-public class ExprSneak extends SimpleExpression<Boolean> {
+public class ExprNPCAmbientSound extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprSneak.class, Boolean.class, ExpressionType.COMBINED, "(sneak|shift|crouch)[ing] [state] of %player%");
+        Skript.registerExpression(ExprNPCAmbientSound.class, String.class, ExpressionType.COMBINED, "ambientsound of npc [with] [the] [id] %integers%");
     }
 
-    private Expression<Player> player;
+    private Expression<Integer> id;
 
     @Override
-    public Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
+    public Class<? extends String> getReturnType() {
+        return String.class;
     }
 
     @Override
@@ -41,30 +43,31 @@ public class ExprSneak extends SimpleExpression<Boolean> {
 
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
-        player = (Expression<Player>) exprs[0];
+        id = (Expression<Integer>) exprs[0];
         return true;
     }
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Sneak state expression with expression player: " + player.toString(event, debug);
+        return "Ambient sound of npc expression with expression integer: " + id.toString(event, debug);
     }
 
     @Override
     @Nullable
-    protected Boolean[] get(Event event) {
-        if (player.getSingle(event) != null) {
-            return new Boolean[] {player.getSingle(event).isSneaking()};
+    protected String[] get(Event event) {
+        if (id.getSingle(event) != null) {
+            return new String[] {CitizensAPI.getNPCRegistry().getById(id.getSingle(event)).data().get(NPC.AMBIENT_SOUND_METADATA)};
         }
         return null;
     }
     @Override
     public void change(Event event, Object[] delta, Changer.ChangeMode mode){
-        if(player != null){
-            for(Player p : player.getAll(event)){
+        if(id != null){
+            for(Integer ids : id.getAll(event)){
+                NPC npc = CitizensAPI.getNPCRegistry().getById(ids);
                 if(mode == Changer.ChangeMode.SET) {
-                    Boolean x = ((Boolean) delta[0]);
-                    p.setSneaking(x);
+                    String sound = ScrubNPCSound.getSound((String)delta[0]);
+                    npc.data().setPersistent(NPC.AMBIENT_SOUND_METADATA, sound);
                 }
             }
 
@@ -74,10 +77,8 @@ public class ExprSneak extends SimpleExpression<Boolean> {
     @Override
     public Class<?>[] acceptChange(final Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
+            return CollectionUtils.array(String.class);
         }
         return null;
     }
 }
-
-
