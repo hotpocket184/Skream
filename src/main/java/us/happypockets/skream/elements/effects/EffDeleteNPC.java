@@ -15,9 +15,9 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Register Team")
-@Description({"Registers/creates a team"})
-@Examples("register team \"red\"")
+@Name("Delete NPC")
+@Description({"Deletes an NPC's data and completely removes it from the server."})
+@Examples("delete npc last spawned npc")
 @Since("1.0")
 
 public class EffDeleteNPC extends Effect {
