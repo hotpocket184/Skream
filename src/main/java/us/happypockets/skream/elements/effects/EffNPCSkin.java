@@ -17,9 +17,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Register Team")
-@Description({"Registers/creates a team"})
-@Examples("register team \"red\"")
+@Name("NPC Skin")
+@Description({"Allows you to set the skin of the specified npc to the specified player's name (the string value).", "NOTE: This only works if the npc's type is a player!"})
+@Examples("set skin of npc last spawned npc to \"hapily\"")
 @Since("1.0")
 
 public class EffNPCSkin extends Effect {
