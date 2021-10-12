@@ -16,9 +16,9 @@ import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Register Team")
-@Description({"Registers/creates a team"})
-@Examples("register team \"red\"")
+@Name("Respawn NPC")
+@Description({"Respawns an npc at the specified location if it has been despawned (see Despawn NPC effect)."})
+@Examples("set {id} to npc id of last spawned npc", "respawn npc {id} at player")
 @Since("1.0")
 
 public class EffRespawnNPC extends Effect {
