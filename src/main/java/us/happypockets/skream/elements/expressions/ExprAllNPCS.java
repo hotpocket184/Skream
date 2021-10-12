@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 @Name("All NPCs")
-@Description({"Returns a list containing the npcs. (Loop-able)"})
+@Description({"Returns a list containing the id of all npcs. (Loop-able)"})
 @Examples({"broadcast \"%all npcs%\"", "set {_} to a random element out of all teams", "loop all teams:", "set glowing of npc all npcs to true"})
 @Since("1.0")
 
