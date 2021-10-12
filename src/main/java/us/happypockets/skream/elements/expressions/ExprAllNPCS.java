@@ -17,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-@Name("All Teams")
-@Description({"Returns a list containing the teams. (Loop-able)"})
-@Examples({"broadcast \"%all teams%\"", "set {_} to a random element out of all teams", "loop all teams:"})
+@Name("All NPCs")
+@Description({"Returns a list containing the npcs. (Loop-able)"})
+@Examples({"broadcast \"%all npcs%\"", "set {_} to a random element out of all teams", "loop all teams:", "set glowing of npc all npcs to true"})
 @Since("1.0")
 
 public class ExprAllNPCS extends SimpleExpression<Integer> {
