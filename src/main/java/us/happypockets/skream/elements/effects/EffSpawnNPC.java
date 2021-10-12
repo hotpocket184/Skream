@@ -19,9 +19,9 @@ import org.jetbrains.annotations.Nullable;
 import us.happypockets.skream.elements.expressions.ExprLastNPC;
 import us.happypockets.skream.util.ScrubEntityType;
 
-@Name("Register Team")
-@Description({"Registers/creates a team"})
-@Examples("register team \"red\"")
+@Name("Spawn NPC")
+@Description({"Creates an npc with the specified name and spawns it at the specified location as the specified type if it is set (default type is a player)."})
+@Examples("spawn npc named \"hapily\" at player as sheep")
 @Since("1.0")
 
 public class EffSpawnNPC extends Effect {
