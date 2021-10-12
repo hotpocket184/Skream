@@ -17,9 +17,9 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Prefix of Team")
-@Description({"Sets/gets the prefix of the specified team."})
-@Examples({"set prefix of team red to \"happypockets\"", "broadcast \"%prefix of team happypockets%\""})
+@Name("Collidability of NPC")
+@Description({"Sets/gets the collidability of the specified npc."})
+@Examples({"set collidability of npc last spawned npc to true", "broadcast \"%collidability of npc last spawned npc%\""})
 @Since("1.0")
 
 public class ExprNPCCollidability extends SimpleExpression<Boolean> {
