@@ -17,9 +17,9 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Prefix of Team")
-@Description({"Sets/gets the prefix of the specified team."})
-@Examples({"set prefix of team red to \"happypockets\"", "broadcast \"%prefix of team happypockets%\""})
+@Name("Silent State of NPC")
+@Description({"Sets/gets the silent state of the specified NPC."})
+@Examples({"set silent state of npc last spawned npc to true", "broadcast \"%silent state of npc last spawned npc%\""})
 @Since("1.0")
 
 public class ExprNPCSilent extends SimpleExpression<Boolean> {
