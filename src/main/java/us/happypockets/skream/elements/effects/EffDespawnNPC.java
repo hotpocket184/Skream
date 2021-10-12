@@ -15,9 +15,9 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Register Team")
-@Description({"Registers/creates a team"})
-@Examples("register team \"red\"")
+@Name("Despawn NPC")
+@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
+@Examples("set {id} to last spawned npc", "despawn npc {id}")
 @Since("1.0")
 
 public class EffDespawnNPC extends Effect {
