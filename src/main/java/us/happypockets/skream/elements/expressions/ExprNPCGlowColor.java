@@ -19,9 +19,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Color of Team")
-@Description({"Sets/gets the color of the specified team.", "COLORS: red, dark_red, blue, dark_blue, aqua, dark_aqua, dark_purple, light_purple, black, white, yellow, gold, gray, dark_gray, green and dark_green"})
-@Examples({"set color of team happypockets to \"red\"", "broadcast \"%color of team happypockets%Hello\" # Broadcasts \"Hello\" in the same color of the team specified in the expression"})
+@Name("Glow Color of NPC")
+@Description({"Sets/gets the glow color of the specified NPC.", "COLORS: red, dark_red, blue, dark_blue, aqua, dark_aqua, dark_purple, light_purple, black, white, yellow, gold, gray, dark_gray, green and dark_green"})
+@Examples({"set glow color of npc last spawned npc to \"red\"", "broadcast \"%glow color of npc last spawned npc%Hello\" # Broadcasts \"Hello\" in the same color of the npc specified in the expression"})
 @Since("1.0")
 
 public class ExprNPCGlowColor extends SimpleExpression<String> {
