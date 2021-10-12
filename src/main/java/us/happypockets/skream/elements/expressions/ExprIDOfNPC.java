@@ -15,9 +15,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Size of Team")
-@Description({"Returns the integer value of the size of the specified team."})
-@Examples("broadcast \"%size of team happypockets%\"")
+@Name("NPC Id of Entity")
+@Description({"Returns the id of the specified entity if they are an npc."})
+@Examples("set {id} to npc id of target")
 @Since("1.0")
 
 public class ExprIDOfNPC extends SimpleExpression<Integer> {
