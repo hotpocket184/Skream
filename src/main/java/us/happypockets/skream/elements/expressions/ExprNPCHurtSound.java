@@ -18,9 +18,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import us.happypockets.skream.util.ScrubNPCSound;
 
-@Name("Prefix of Team")
-@Description({"Sets/gets the prefix of the specified team."})
-@Examples({"set prefix of team red to \"happypockets\"", "broadcast \"%prefix of team happypockets%\""})
+@Name("Hurt Sound of NPC")
+@Description({"Sets/gets the hurt sound of the specified NPC"})
+@Examples({"set hurtsound of npc last spawned npc to \"entity.bat.death\"", "broadcast \"%hurtsound of npc last spawned npc%\""})
 @Since("1.0")
 
 public class ExprNPCHurtSound extends SimpleExpression<String> {
