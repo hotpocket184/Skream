@@ -17,9 +17,9 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Prefix of Team")
-@Description({"Sets/gets the prefix of the specified team."})
-@Examples({"set prefix of team red to \"happypockets\"", "broadcast \"%prefix of team happypockets%\""})
+@Name("Name of NPC")
+@Description({"Sets/gets the name of the specifiednpc."})
+@Examples({"set name of npc last spawned npc to \"happypockets\"", "broadcast \"%name of npc last spawned npc%\""})
 @Since("1.0")
 
 public class ExprNPCName extends SimpleExpression<String> {
