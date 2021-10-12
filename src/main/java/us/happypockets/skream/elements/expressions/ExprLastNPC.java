@@ -15,9 +15,9 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Size of Team")
-@Description({"Returns the integer value of the size of the specified team."})
-@Examples("broadcast \"%size of team happypockets%\"")
+@Name("Last Spawned NPC")
+@Description({"Returns the id of the last spawned npc (that was spawned via this addon)"})
+@Examples("set {id} to last spawned npc")
 @Since("1.0")
 
 public class ExprLastNPC extends SimpleExpression<Integer> {
