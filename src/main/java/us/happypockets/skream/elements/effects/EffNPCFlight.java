@@ -12,16 +12,12 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
-import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
-import us.happypockets.skream.elements.expressions.ExprLastNPC;
-import us.happypockets.skream.util.ScrubEntityType;
 
 @Name("NPC Flight")
 @Description({"Allows you to set the flight mode of the specified npc to false/true"})
-@Examples("set flight mode of npc last spawned npc to true"")
+@Examples("set flight mode of npc last spawned npc to true")
 @Since("1.0")
 
 public class EffNPCFlight extends Effect {
