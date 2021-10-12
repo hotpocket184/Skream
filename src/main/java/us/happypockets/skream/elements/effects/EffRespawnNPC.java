@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Name("Respawn NPC")
 @Description({"Respawns an npc at the specified location if it has been despawned (see Despawn NPC effect)."})
-@Examples("set {id} to last spawned npc", "respawn npc {id} at player")
+@Examples({"set {id} to last spawned npc", "respawn npc {id} at player"})
 @Since("1.0")
 
 public class EffRespawnNPC extends Effect {
