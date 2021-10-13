@@ -14,26 +14,28 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.trait.trait.MobType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
-import us.happypockets.skream.util.ScrubNPCSound;
+import us.happypockets.skream.util.ScrubEntityType;
 
-@Name("Death Sound of NPC")
-@Description({"Sets/gets the death sound of the specified NPC", "NOTE: Can only be used if the NPC's type is not a player. Additionally, this value will return <none> if it has not been set."})
-@Examples({"set deathsound of npc last spawned npc to \"entity.bat.death\"", "broadcast \"%deathsound of npc last spawned npc%\""})
+@Name("Name of NPC")
+@Description({"Sets/gets the name of the specifiednpc."})
+@Examples({"set name of npc last spawned npc to \"happypockets\"", "broadcast \"%name of npc last spawned npc%\""})
 @Since("1.0")
 
-public class ExprNPCDeathSound extends SimpleExpression<String> {
+public class ExprTypeOfNPC extends SimpleExpression<EntityType> {
 
     static {
-        Skript.registerExpression(ExprNPCDeathSound.class, String.class, ExpressionType.COMBINED, "deathsound of npc [with] [the] [id] %integers%");
+        Skript.registerExpression(ExprTypeOfNPC.class, EntityType.class, ExpressionType.COMBINED, "type of npc [with] [the] [id] %integer%");
     }
 
     private Expression<Integer> id;
 
     @Override
-    public Class<? extends String> getReturnType() {
-        return String.class;
+    public Class<? extends EntityType> getReturnType() {
+        return EntityType.class;
     }
 
     @Override
@@ -49,36 +51,35 @@ public class ExprNPCDeathSound extends SimpleExpression<String> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Death sound of npc expression with expression integer: " + id.toString(event, debug);
+        return "Type of npc expression with expression integer: " + id.toString(event, debug);
     }
 
     @Override
     @Nullable
-    protected String[] get(Event event) {
+    protected EntityType[] get(Event event) {
         if (id.getSingle(event) != null) {
-            return new String[] {CitizensAPI.getNPCRegistry().getById(id.getSingle(event)).data().get(NPC.DEATH_SOUND_METADATA)};
+            return new EntityType[] {CitizensAPI.getNPCRegistry().getById(id.getSingle(event)).getOrAddTrait(MobType.class).getType()};
         }
         return null;
     }
     @Override
     public void change(Event event, Object[] delta, Changer.ChangeMode mode){
         if(id != null){
-            for(Integer ids : id.getAll(event)){
-                NPC npc = CitizensAPI.getNPCRegistry().getById(ids);
-                if(mode == Changer.ChangeMode.SET) {
-                    String sound = ScrubNPCSound.getSound((String)delta[0]);
-                    npc.data().setPersistent(NPC.DEATH_SOUND_METADATA, sound);
-                }
+            NPC npc = CitizensAPI.getNPCRegistry().getById(id.getSingle(event));
+            EntityType type = ScrubEntityType.getType(delta[0].toString());
+            if(mode == Changer.ChangeMode.SET) {
+                npc.getOrAddTrait(MobType.class).setType(type);
             }
-
         }
     }
 
     @Override
     public Class<?>[] acceptChange(final Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(String.class);
+            return CollectionUtils.array(EntityType.class);
         }
         return null;
     }
 }
+
+

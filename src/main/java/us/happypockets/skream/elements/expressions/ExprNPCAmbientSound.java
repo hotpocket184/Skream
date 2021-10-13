@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import us.happypockets.skream.util.ScrubNPCSound;
 
 @Name("Ambient Sound of NPC")
-@Description({"Sets/gets the ambient sound of the specified NPC"})
+@Description({"Sets/gets the ambient sound of the specified NPC", "NOTE: Can only be used if the NPC's type is not a player. Additionally, this value will return <none> if it has not been set."})
 @Examples({"set ambientsound of npc last spawned npc to \"entity.bat.death\"", "broadcast \"%ambientsound of npc last spawned npc%\""})
 @Since("1.0")
 
