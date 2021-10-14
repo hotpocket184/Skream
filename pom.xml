@@ -77,14 +77,21 @@
             <artifactId>Skript</artifactId>
             <scope>system</scope>
             <version>2.5.3</version>
-            <systemPath>C:/Users/ryanb/Desktop/Gaming/Minecraft/Skripts/Skript.jar</systemPath>
+            <systemPath>C:/Users/madli/OneDrive/Desktop/Game Stuff/Skream/Skript.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
             <artifactId>Citizens</artifactId>
             <scope>system</scope>
             <version>2.0.28-SNAPSHOT</version>
-            <systemPath>C:/Users/ryanb/Desktop/Gaming/Minecraft/Plugins/Citizens.jar</systemPath>
+            <systemPath>C:/Users/madli/OneDrive/Desktop/Game Stuff/Skream/Citizens.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.luckperms.api</groupId>
+            <artifactId>LuckPerms</artifactId>
+            <scope>system</scope>
+            <version>5.3.47</version>
+            <systemPath>C:/Users/madli/OneDrive/Desktop/Game Stuff/Skream/LuckPerms.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
