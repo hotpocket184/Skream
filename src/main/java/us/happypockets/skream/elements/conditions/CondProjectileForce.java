@@ -11,6 +11,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,33 +20,33 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Checks if a player an advancement."})
 @Examples({"if player has advancement \"adventure/shoot_arrow\":"})
 
-public class CondHasPermission extends Condition {
+public class CondProjectileForce extends Condition{
 
     static {
-        Skript.registerCondition(CondHasAdvancement.class, "%player% (1¦has|2¦does(n't| not) have) [the] permission %string%");
+        Skript.registerCondition(CondProjectileForce.class, "force of %projectiles% (1¦is|2¦is(n't| not)) %number%");
     }
 
-    Expression<Player> player;
-    Expression<String> permission;
+    Expression<Projectile> projectile;
+    Expression<Number> number;
 
-    @SuppressWarnings({"unchecked", "null"})
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
-        this.player = (Expression<Player>) expressions[0];
-        this.permission = (Expression<String>) expressions[1];
-        setNegated(parser.mark == 1);
+        this.projectile = (Expression<Projectile>) expressions[0];
+        this.number = (Expression<Number>) expressions[1];
+        setNegated(parser.mark  == 1);
         return true;
     }
 
     @Override
     public @NonNull String toString(@Nullable Event event, boolean debug) {
-        return "Player expression: " + player.toString(event, debug) + " String expression: " + permission.toString(event, debug);
+        return "Projectile expression: " + projectile.toString(event, debug) + " Number expression: " + number.toString(event, debug);
     }
 
     @Override
     public boolean check(@NonNull Event event) {
-        Player p = player.getSingle(event);
+        Projectile p = projectile.getSingle(event);
         if (p == null) return isNegated();
-        return p.hasPermission(permission.toString());
+        return p. ? isNegated() : !isNegated();
     }
 }

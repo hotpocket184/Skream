@@ -20,6 +20,7 @@ import net.luckperms.api.messenger.MessengerProvider;
 import net.luckperms.api.metastacking.MetaStackFactory;
 import net.luckperms.api.model.group.GroupManager;
 import net.luckperms.api.model.user.UserManager;
+import net.luckperms.api.node.Node;
 import net.luckperms.api.node.NodeBuilderRegistry;
 import net.luckperms.api.node.matcher.NodeMatcherFactory;
 import net.luckperms.api.platform.Platform;
@@ -67,8 +68,9 @@ public class EffAddPermission extends Effect {
     protected void execute(Event event) {
         if (player == null) return;
         for (Player p : player.getAll(event)) {
-            LuckPerms.
+            LuckPerms.getUserManager().modifyUser(p.getUniqueId(), user -> {
+                user.data().add(Node.builder(permission.toString()).build());
+            }
         }
-
     }
 }
