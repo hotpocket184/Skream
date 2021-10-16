@@ -8,17 +8,14 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Has Advancement")
-@Description({"Checks if a player an advancement."})
-@Examples({"if player has advancement \"adventure/shoot_arrow\":"})
+@Name("Force of Projectile")
+@Description({"Checks what the force of a projectile is."})
+@Examples({"if force of projectile is 1:"})
 
 public class CondProjectileForce extends Condition{
 

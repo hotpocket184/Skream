@@ -15,9 +15,9 @@ import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Has Advancement")
-@Description({"Checks if a player an advancement."})
-@Examples({"if player has advancement \"adventure/shoot_arrow\":"})
+@Name("Has Permission")
+@Description({"Checks if a player a permission."})
+@Examples({"if player has permission \"skript.admin\":"})
 
 public class CondHasPermission extends Condition {
 

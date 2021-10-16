@@ -8,33 +8,10 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import net.citizensnpcs.api.npc.NPC;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.actionlog.ActionLogger;
-import net.luckperms.api.context.ContextManager;
-import net.luckperms.api.event.EventBus;
-import net.luckperms.api.event.LuckPermsEvent;
-import net.luckperms.api.messaging.MessagingService;
-import net.luckperms.api.messenger.MessengerProvider;
-import net.luckperms.api.metastacking.MetaStackFactory;
-import net.luckperms.api.model.group.GroupManager;
-import net.luckperms.api.model.user.UserManager;
-import net.luckperms.api.node.Node;
-import net.luckperms.api.node.NodeBuilderRegistry;
-import net.luckperms.api.node.matcher.NodeMatcherFactory;
-import net.luckperms.api.platform.Platform;
-import net.luckperms.api.platform.PlayerAdapter;
-import net.luckperms.api.platform.PluginMetadata;
-import net.luckperms.api.query.QueryOptionsRegistry;
-import net.luckperms.api.track.TrackManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("null")
 @Name("Add Permission")
@@ -42,7 +19,6 @@ import java.util.concurrent.CompletableFuture;
 @Examples({"add \"skript.admin\" to permissions of player"})
 
 public class EffAddPermission extends Effect {
-    LuckPerms api;
 
     static {
         Skript.registerEffect(EffAddAdvancement.class, "add [the [permission]] %string% to [the] permissions of %player%");
@@ -68,9 +44,7 @@ public class EffAddPermission extends Effect {
     protected void execute(Event event) {
         if (player == null) return;
         for (Player p : player.getAll(event)) {
-            LuckPerms.getUserManager().modifyUser(p.getUniqueId(), user -> {
-                user.data().add(Node.builder(permission.toString()).build());
-            }
+            p.getEffectivePermissions().add((PermissionAttachmentInfo) permission);
         }
     }
 }
