@@ -3,7 +3,7 @@ version: '${project.version}'
 main: us.happypockets.skream.Skream
 api-version: 1.16
 depend: [ Skript ]
-softdepend: [ Citizens ]
+softdepend: [ Citizens, LuckPerms ]
 authors: [ hapily, hotpocket184 ]
 description: Placeholder
 website: https://github.com/hapily04/Skream
