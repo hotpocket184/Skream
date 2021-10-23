@@ -24,7 +24,7 @@ import us.happypockets.skream.elements.expressions.ExprLastNPC;
 
 @Name("Spawn NPC")
 @Description({"Creates an npc with the specified name and spawns it at the specified location as the specified type if it is set (default type is a player)."})
-@Examples("spawn npc named \"hapily\" at player as sheep")
+@Examples("spawn npc named \"hapily\" at player as player")
 @Since("1.0")
 
 public class EffSpawnNPC extends Effect {
@@ -36,7 +36,7 @@ public class EffSpawnNPC extends Effect {
             if (c != null)
                 CACHE.put(EntityData.fromClass(c), e); // Cache Skript EntityData -> Bukkit EntityType
         }
-        Skript.registerEffect(EffSpawnNPC.class, "(spawn|create) [a] npc named %string% at %location% [as %entitydata%]");
+        Skript.registerEffect(EffSpawnNPC.class, "(spawn|create) [a] npc named %string% at %location% as %entitydata%");
     }
 
     private Expression<String> name;
@@ -60,9 +60,8 @@ public class EffSpawnNPC extends Effect {
     @Override
     protected void execute(Event event) {
         NPCRegistry reg = CitizensAPI.getNPCRegistry();
-        NPC npc;
         EntityType t = toBukkitEntityType(type.getSingle(event));
-        npc = reg.createNPC(t, name.getSingle(event));
+        NPC npc = reg.createNPC(t, name.getSingle(event));
         npc.spawn(loc.getSingle(event));
         ExprLastNPC.lastNPCCreated = npc;
     }
