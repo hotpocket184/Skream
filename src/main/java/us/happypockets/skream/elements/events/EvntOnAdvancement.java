@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class EvntOnAdvancement extends SimpleEvent {
 
     static {
-        Skript.registerEvent("On Advancement", SimpleEvent.class, PlayerAdvancementDoneEvent.class, "[on] [player] advancement (complete|done)");
+        Skript.registerEvent("Advancement", SimpleEvent.class, PlayerAdvancementDoneEvent.class, "[player] advancement (complete|done)");
 
         EventValues.registerEventValue(PlayerAdvancementDoneEvent.class, NamespacedKey.class, new Getter<NamespacedKey, PlayerAdvancementDoneEvent>() {
             @Override
