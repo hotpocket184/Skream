@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -16,15 +13,16 @@ import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Despawn NPC")
-@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
-@Examples({"set {id} to last spawned npc", "despawn npc {id}"})
+@Name("Unpause NPC Pathfinding")
+@Description({"Unpauses the NPC and allows them to complete any previously assigned pathfinding tasks."})
+@Examples({"unpause pathfinding for npc last spawned npc"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffNPCUnpauseNav extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCUnpauseNav.class, "(un[ |-]pause|continue) (navigation|path[ |-]finding) for npc [with] [the] [id] %integers%");
+        Skript.registerEffect(EffNPCUnpauseNav.class, "(un[ |-]pause|continue) (navigation|path[ |-]finding) for npc %integers%");
     }
 
     private Expression<Integer> id;

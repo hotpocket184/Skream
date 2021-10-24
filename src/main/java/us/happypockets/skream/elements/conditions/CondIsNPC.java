@@ -4,6 +4,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.RequiredPlugins;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,9 +15,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("null")
-@Name("In Water")
-@Description({"Checks if the specified entity/entities is/are in water."})
-@Examples({"if player is in water:"})
+@Name("Is NPC")
+@Description({"Checks if the specified entity is an NPC."})
+@Examples({"if target entity is npc:"})
+@RequiredPlugins("Citizens")
 
 public class CondIsNPC extends Condition {
 

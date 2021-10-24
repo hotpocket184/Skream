@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -19,11 +16,12 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
 @Examples({"set {id} to last spawned npc", "despawn npc {id}"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffDespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDespawnNPC.class, "de[ |-]spawn npc [with] [the] [id] %integers%");
+        Skript.registerEffect(EffDespawnNPC.class, "de[ |-]spawn npc %integers%");
     }
 
     private Expression<Integer> id;

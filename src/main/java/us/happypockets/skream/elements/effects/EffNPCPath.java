@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,19 +10,19 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Despawn NPC")
-@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
-@Examples({"set {id} to last spawned npc", "despawn npc {id}"})
+@Name("Make NPC Pathfind")
+@Description({"Makes the specified NPC start pathfinding to the specified location.", "NOTE: If the NPC is unable to naturally walk to the location, it will teleport!"})
+@Examples({"make npc last spawned npc pathfind to location of target block"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffNPCPath extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCPath.class, "make npc [with] [the] [id] %integers% path[ |-]find to [the] [location [at]] %location%");
+        Skript.registerEffect(EffNPCPath.class, "make npc %integers% path[ |-]find to [the] [location [at]] %location%");
     }
 
     private Expression<Integer> id;

@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -16,15 +13,16 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Despawn NPC")
-@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
-@Examples({"set {id} to last spawned npc", "despawn npc {id}"})
+@Name("Make NPC Follow")
+@Description({"Makes the npc continuously pathfind (follow) to the specified livingentity.", "NOTE: You can stop this from occurring by using the CancelNPCPath effect."})
+@Examples({"make npc last spawned npc follow player"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffNPCFollow extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCFollow.class, "make npc [with] [the] [id] %integers% follow %livingentity%");
+        Skript.registerEffect(EffNPCFollow.class, "make npc %integers% follow %livingentity%");
     }
 
     private Expression<Integer> id;

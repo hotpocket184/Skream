@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -17,15 +14,16 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Despawn NPC")
-@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
-@Examples({"set {id} to last spawned npc", "despawn npc {id}"})
+@Name("Equip NPC")
+@Description({"Allows you to equip an npc with an itemstack. This is used for armor."})
+@Examples({"equip npc last spawned npc with iron leggings"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffEquipNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffEquipNPC.class, "equip npc [with] [the] [id] %integers% with %itemstack%");
+        Skript.registerEffect(EffEquipNPC.class, "equip npc %integers% with %itemstack%");
     }
 
     private Expression<Integer> id;

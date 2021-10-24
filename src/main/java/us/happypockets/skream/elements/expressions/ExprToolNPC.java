@@ -2,10 +2,7 @@ package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,21 +12,20 @@ import ch.njol.util.coll.CollectionUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
-import net.citizensnpcs.api.trait.trait.MobType;
-import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Name of NPC")
-@Description({"Sets/gets the name of the specifiednpc."})
-@Examples({"set name of npc last spawned npc to \"happypockets\"", "broadcast \"%name of npc last spawned npc%\""})
+@Name("Tool/Held Item of NPC")
+@Description({"Sets/gets the npc's held item (main hand)."})
+@Examples({"set tool of npc last spawned npc to dirt", "broadcast \"%tool of npc last spawned npc%\""})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprToolNPC extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprToolNPC.class, ItemStack.class, ExpressionType.COMBINED, "(tool|held item) of npc [with] [the] [id] %integers%");
+        Skript.registerExpression(ExprToolNPC.class, ItemStack.class, ExpressionType.COMBINED, "(tool|held item) of npc %integers%");
     }
 
     private Expression<Integer> id;

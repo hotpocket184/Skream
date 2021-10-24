@@ -1,27 +1,23 @@
 package us.happypockets.skream.elements.conditions;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.RequiredPlugins;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Has Advancement")
-@Description({"Checks if a player an advancement."})
-@Examples({"if player has advancement \"adventure/shoot_arrow\":"})
+@Name("NPC Is Navigating")
+@Description({"Checks if an npc is pathfinding/navigating."})
+@Examples({"if npc last spawned npc is navigating:"})
+@RequiredPlugins("Citizens")
 
 public class CondIsNavigating extends Condition {
 

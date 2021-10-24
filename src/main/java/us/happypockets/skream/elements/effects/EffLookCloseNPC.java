@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -16,15 +13,16 @@ import net.citizensnpcs.trait.LookClose;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Despawn NPC")
-@Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
-@Examples({"set {id} to last spawned npc", "despawn npc {id}"})
+@Name("Lookclose trait of NPC")
+@Description({"Allows you to set the lookclose trait of the specified npc to true/false"})
+@Examples({"set lookclose trait of npc last spawned npc to true"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffLookCloseNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffLookCloseNPC.class, "set look[ |-]close trait of npc [with] [the] [id] %integers% to %boolean%");
+        Skript.registerEffect(EffLookCloseNPC.class, "set look[ |-]close trait of npc %integers% to %boolean%");
     }
 
     private Expression<Integer> id;

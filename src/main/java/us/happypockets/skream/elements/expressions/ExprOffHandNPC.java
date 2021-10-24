@@ -2,10 +2,7 @@ package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -19,15 +16,16 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Name of NPC")
-@Description({"Sets/gets the name of the specifiednpc."})
-@Examples({"set name of npc last spawned npc to \"happypockets\"", "broadcast \"%name of npc last spawned npc%\""})
+@Name("Offhand of NPC")
+@Description({"Sets/gets the item in the npc's offhand."})
+@Examples({"set offhand slot of npc last spawned npc to dirt", "broadcast \"%offhand slot of npc last spawned npc%\""})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprOffHandNPC extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprOffHandNPC.class, ItemStack.class, ExpressionType.COMBINED, "[item from [the]] off[ |-]hand [slot] of npc [with] [the] [id] %integer%");
+        Skript.registerExpression(ExprOffHandNPC.class, ItemStack.class, ExpressionType.COMBINED, "[item from [the]] off[ |-]hand [slot] of npc %integer%");
     }
 
     private Expression<Integer> id;

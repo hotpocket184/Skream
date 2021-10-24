@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,7 +10,6 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,11 +17,12 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Allows you to set the skin of the specified npc to the specified player's name (the string value).", "NOTE: This only works if the npc's type is a player!"})
 @Examples("set skin of npc last spawned npc to \"hapily\"")
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffNPCSkin extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCSkin.class, "set skin of npc [with] [the] [id] %integer% to %string%");
+        Skript.registerEffect(EffNPCSkin.class, "set skin of npc %integer% to %string%");
     }
 
     private Expression<Integer> id;

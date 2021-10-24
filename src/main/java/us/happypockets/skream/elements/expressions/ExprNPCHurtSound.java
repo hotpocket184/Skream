@@ -2,10 +2,7 @@ package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -22,6 +19,7 @@ import us.happypockets.skream.util.ScrubNPCSound;
 @Description({"Sets/gets the hurt sound of the specified NPC", "NOTE: Can only be used if the NPC's type is not a player. Additionally, this value will return <none> if it has not been set."})
 @Examples({"set hurtsound of npc last spawned npc to \"entity.bat.death\"", "broadcast \"%hurtsound of npc last spawned npc%\""})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprNPCHurtSound extends SimpleExpression<String> {
 

@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -20,11 +17,12 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Respawns an npc at the specified location if it has been despawned (see Despawn NPC effect)."})
 @Examples({"set {id} to last spawned npc", "respawn npc {id} at player"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffRespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffRespawnNPC.class, "respawn npc [with] [the] [id] %integers% at %location%");
+        Skript.registerEffect(EffRespawnNPC.class, "respawn npc %integers% at %location%");
     }
 
     private Expression<Integer> id;

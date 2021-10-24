@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.entity.EntityData;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -26,6 +23,7 @@ import us.happypockets.skream.elements.expressions.ExprLastNPC;
 @Description({"Creates an npc with the specified name and spawns it at the specified location as the specified type if it is set (default type is a player)."})
 @Examples("spawn npc named \"hapily\" at player as player")
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffSpawnNPC extends Effect {
     private static final BiMap<EntityData, EntityType> CACHE = HashBiMap.create();
