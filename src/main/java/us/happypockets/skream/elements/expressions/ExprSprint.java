@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprSprint extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprSprint.class, Boolean.class, ExpressionType.COMBINED, "(sprint|run)[ing] [state] of %player%");
+        Skript.registerExpression(ExprSprint.class, Boolean.class, ExpressionType.COMBINED, "(sprint|run)[ing] [state] of %players%");
     }
 
     private Expression<Player> player;
