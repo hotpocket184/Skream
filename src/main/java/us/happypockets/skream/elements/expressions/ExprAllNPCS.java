@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -21,6 +18,7 @@ import java.util.ArrayList;
 @Description({"Returns a list containing the id of all npcs. (Loop-able)"})
 @Examples({"broadcast \"%all npcs%\"", "set {_} to a random element out of all teams", "loop all teams:", "set glowing of npc all npcs to true"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprAllNPCS extends SimpleExpression<Integer> {
 

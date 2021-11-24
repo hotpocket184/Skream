@@ -2,10 +2,7 @@ package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -23,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Sets/gets the glow color of the specified NPC.", "COLORS: red, dark_red, blue, dark_blue, aqua, dark_aqua, dark_purple, light_purple, black, white, yellow, gold, gray, dark_gray, green and dark_green"})
 @Examples({"set glow color of npc last spawned npc to \"red\"", "broadcast \"%glow color of npc last spawned npc%Hello\" # Broadcasts \"Hello\" in the same color of the npc specified in the expression"})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprNPCGlowColor extends SimpleExpression<String> {
 

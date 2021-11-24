@@ -11,26 +11,28 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.trait.trait.Equipment;
 import org.bukkit.event.Event;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Vulnerability of NPC")
-@Description({"Sets/gets the vulnerability state (whether they can be damaged or not) of the specified NPC."})
-@Examples({"set vulnerability of npc last spawned npc to false", "broadcast \"%vulnerability of npc last spawned npc%\""})
+@Name("Tool/Held Item of NPC")
+@Description({"Sets/gets the npc's held item (main hand)."})
+@Examples({"set tool of npc last spawned npc to dirt", "broadcast \"%tool of npc last spawned npc%\""})
 @Since("1.0")
 @RequiredPlugins("Citizens")
 
-public class ExprNPCVulnerability extends SimpleExpression<Boolean> {
+public class ExprToolNPC extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprNPCVulnerability.class, Boolean.class, ExpressionType.COMBINED, "vulnerability of npc [with] [the] [id] %integers%");
+        Skript.registerExpression(ExprToolNPC.class, ItemStack.class, ExpressionType.COMBINED, "(tool|held item) of npc %integers%");
     }
 
     private Expression<Integer> id;
 
     @Override
-    public Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
+    public Class<? extends ItemStack> getReturnType() {
+        return ItemStack.class;
     }
 
     @Override
@@ -46,25 +48,23 @@ public class ExprNPCVulnerability extends SimpleExpression<Boolean> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Vulnerability of npc expression with expression integer: " + id.toString(event, debug);
+        return "Tool of npc expression with expression integer: " + id.toString(event, debug);
     }
 
     @Override
     @Nullable
-    protected Boolean[] get(Event event) {
+    protected ItemStack[] get(Event event) {
         if (id.getSingle(event) != null) {
-            return new Boolean[] {CitizensAPI.getNPCRegistry().getById(id.getSingle(event)).data().get(NPC.DEFAULT_PROTECTED_METADATA)};
+            return new ItemStack[] {CitizensAPI.getNPCRegistry().getById(id.getSingle(event)).getOrAddTrait(Equipment.class).get(Equipment.EquipmentSlot.HAND)};
         }
         return null;
     }
     @Override
     public void change(Event event, Object[] delta, Changer.ChangeMode mode){
-        if(id != null){
-            for(Integer ids : id.getAll(event)) {
+        if(mode == Changer.ChangeMode.SET){
+            for(Integer ids : id.getAll(event)){
                 NPC npc = CitizensAPI.getNPCRegistry().getById(ids);
-                if (mode == Changer.ChangeMode.SET) {
-                    npc.data().setPersistent(NPC.DEFAULT_PROTECTED_METADATA, delta[0]);
-                }
+                npc.getOrAddTrait(Equipment.class).set(Equipment.EquipmentSlot.HAND, (ItemStack)delta[0]);
             }
         }
     }
@@ -72,7 +72,7 @@ public class ExprNPCVulnerability extends SimpleExpression<Boolean> {
     @Override
     public Class<?>[] acceptChange(final Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
+            return CollectionUtils.array(ItemStack.class);
         }
         return null;
     }

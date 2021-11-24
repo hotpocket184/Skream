@@ -12,16 +12,16 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Delete NPC")
-@Description({"Deletes an NPC's data and completely removes it from the server."})
-@Examples("delete npc last spawned npc")
+@Name("Cancel NPC Pathfinding")
+@Description({"Stops the NPC from completing its pathfinding goal.", "NOTE: This can also be used to stop an NPC from attacking."})
+@Examples({"cancel pathfinding for npc last spawned npc"})
 @Since("1.0")
 @RequiredPlugins("Citizens")
 
-public class EffDeleteNPC extends Effect {
+public class EffCancelNPCPath extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc %integers%");
+        Skript.registerEffect(EffCancelNPCPath.class, "(cancel|delete) (path[ |-]finding|[the ]path) for npc %integers%");
     }
 
     private Expression<Integer> id;
@@ -35,7 +35,7 @@ public class EffDeleteNPC extends Effect {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Delete npc effect with expression integer: " + id.toString(event, debug);
+        return "Cancel npc path with expression integer: " + id.toString(event, debug);
     }
 
     @Override
@@ -44,8 +44,7 @@ public class EffDeleteNPC extends Effect {
         NPC npc;
         for(Integer i : id.getAll(event)){
             npc = reg.getById(i);
-            npc.destroy();
+            npc.getNavigator().cancelNavigation();
         }
-
     }
 }

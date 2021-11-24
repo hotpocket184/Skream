@@ -5,5 +5,5 @@ api-version: 1.16
 depend: [ Skript ]
 softdepend: [ Citizens, LuckPerms ]
 authors: [ hapily, hotpocket184 ]
-description: Placeholder
+description: A Skript addon for teams, NPCs, advancements, and more!
 website: https://github.com/hapily04/Skream

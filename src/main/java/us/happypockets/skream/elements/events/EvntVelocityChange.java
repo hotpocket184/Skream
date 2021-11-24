@@ -4,7 +4,6 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.RequiredPlugins;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.registrations.EventValues;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class EvntVelocityChange extends SkriptEvent {
 
     static {
-        Skript.registerEvent("On Velocity Change", SimpleEvent.class, PlayerVelocityEvent.class, "[on] [player] velocity (change|shift)");
+        Skript.registerEvent("Velocity Change", SimpleEvent.class, PlayerVelocityEvent.class, "[player] velocity (change|shift)");
         EventValues.registerEventValue(PlayerVelocityEvent.class, Vector.class, new Getter<Vector, PlayerVelocityEvent>() {
             @Override
             @Nullable

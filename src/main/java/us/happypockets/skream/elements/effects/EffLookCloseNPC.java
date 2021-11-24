@@ -9,33 +9,36 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
+import net.citizensnpcs.trait.LookClose;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Delete NPC")
-@Description({"Deletes an NPC's data and completely removes it from the server."})
-@Examples("delete npc last spawned npc")
+@Name("Lookclose trait of NPC")
+@Description({"Allows you to set the lookclose trait of the specified npc to true/false"})
+@Examples({"set lookclose trait of npc last spawned npc to true"})
 @Since("1.0")
 @RequiredPlugins("Citizens")
 
-public class EffDeleteNPC extends Effect {
+public class EffLookCloseNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc %integers%");
+        Skript.registerEffect(EffLookCloseNPC.class, "set look[ |-]close trait of npc %integers% to %boolean%");
     }
 
     private Expression<Integer> id;
+    private Expression<Boolean> bool;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
         this.id = (Expression<Integer>) expressions[0];
+        this.bool = (Expression<Boolean>) expressions[1];
         return true;
     }
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Delete npc effect with expression integer: " + id.toString(event, debug);
+        return "Look-close trait of npc effect with expression integer: " + id.toString(event, debug) + " and expression boolean " + bool.toString(event, debug);
     }
 
     @Override
@@ -44,8 +47,7 @@ public class EffDeleteNPC extends Effect {
         NPC npc;
         for(Integer i : id.getAll(event)){
             npc = reg.getById(i);
-            npc.destroy();
+            npc.getOrAddTrait(LookClose.class).lookClose(bool.getSingle(event));
         }
-
     }
 }

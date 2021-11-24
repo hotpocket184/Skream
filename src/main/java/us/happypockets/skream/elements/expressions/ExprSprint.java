@@ -21,17 +21,17 @@ import org.jetbrains.annotations.Nullable;
 @Examples({"set sprint state of player to true", "broadcast \"sprint state of player\""})
 @Since("1.0")
 
-public class ExprSprint extends SimpleExpression<String> {
+public class ExprSprint extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprSprint.class, String.class, ExpressionType.COMBINED, "(sprint|run)[ing] [state] of %player%");
+        Skript.registerExpression(ExprSprint.class, Boolean.class, ExpressionType.COMBINED, "(sprint|run)[ing] [state] of %players%");
     }
 
     private Expression<Player> player;
 
     @Override
-    public Class<? extends String> getReturnType() {
-        return String.class;
+    public Class<? extends Boolean> getReturnType() {
+        return Boolean.class;
     }
 
     @Override
@@ -52,9 +52,9 @@ public class ExprSprint extends SimpleExpression<String> {
 
     @Override
     @Nullable
-    protected String[] get(Event event) {
+    protected Boolean[] get(Event event) {
         if (player.getSingle(event) != null) {
-            return new String[] {String.valueOf(player.getSingle(event).isSprinting())};
+            return new Boolean[] {player.getSingle(event).isSprinting()};
         }
         return null;
     }
@@ -74,7 +74,7 @@ public class ExprSprint extends SimpleExpression<String> {
     @Override
     public Class<?>[] acceptChange(final Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(String.class);
+            return CollectionUtils.array(Boolean.class);
         }
         return null;
     }

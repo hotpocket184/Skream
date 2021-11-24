@@ -9,33 +9,36 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Delete NPC")
-@Description({"Deletes an NPC's data and completely removes it from the server."})
-@Examples("delete npc last spawned npc")
+@Name("Make NPC Attack")
+@Description({"Makes the npc start pathfinding to the specified livingentity & start attacking when they get close enough.", "NOTE: You can stop this from occurring by using the CancelNPCPath effect."})
+@Examples({"make npc last spawned npc attack player"})
 @Since("1.0")
 @RequiredPlugins("Citizens")
 
-public class EffDeleteNPC extends Effect {
+public class EffNPCAttack extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc %integers%");
+        Skript.registerEffect(EffNPCAttack.class, "make npc %integers% (hit|attack) %livingentity%");
     }
 
     private Expression<Integer> id;
+    private Expression<LivingEntity> entity;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
         this.id = (Expression<Integer>) expressions[0];
+        this.entity = (Expression<LivingEntity>) expressions[1];
         return true;
     }
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Delete npc effect with expression integer: " + id.toString(event, debug);
+        return "Make npc attack effect with expression integer: " + id.toString(event, debug) + " and expression livingentity " + entity.toString(event, debug);
     }
 
     @Override
@@ -44,8 +47,7 @@ public class EffDeleteNPC extends Effect {
         NPC npc;
         for(Integer i : id.getAll(event)){
             npc = reg.getById(i);
-            npc.destroy();
+            npc.getNavigator().setTarget(entity.getSingle(event), true);
         }
-
     }
 }

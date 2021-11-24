@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprSneak extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprSneak.class, Boolean.class, ExpressionType.COMBINED, "(sneak|shift|crouch)[ing] [state] of %player%");
+        Skript.registerExpression(ExprSneak.class, Boolean.class, ExpressionType.COMBINED, "(sneak|shift|crouch)[ing] [state] of %players%");
     }
 
     private Expression<Player> player;

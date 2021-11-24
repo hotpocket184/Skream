@@ -2,10 +2,7 @@ package us.happypockets.skream.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -21,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Sets/gets the silent state of the specified NPC."})
 @Examples({"set silent state of npc last spawned npc to true", "broadcast \"%silent state of npc last spawned npc%\""})
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class ExprNPCSilent extends SimpleExpression<Boolean> {
 

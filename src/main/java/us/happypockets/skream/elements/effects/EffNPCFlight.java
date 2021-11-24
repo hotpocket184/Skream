@@ -1,10 +1,7 @@
 package us.happypockets.skream.elements.effects;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -19,11 +16,12 @@ import org.jetbrains.annotations.Nullable;
 @Description({"Allows you to set the flight mode of the specified npc to false/true"})
 @Examples("set flight mode of npc last spawned npc to true")
 @Since("1.0")
+@RequiredPlugins("Citizens")
 
 public class EffNPCFlight extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCFlight.class, "set flight [mode] of npc [with] [the] [id] %integer% to %boolean%");
+        Skript.registerEffect(EffNPCFlight.class, "set flight [mode] of npc %integer% to %boolean%");
     }
 
     private Expression<Integer> id;
