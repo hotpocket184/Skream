@@ -15,6 +15,7 @@ import net.citizensnpcs.trait.ScoreboardTrait;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Glow Color of NPC")
 @Description({"Sets/gets the glow color of the specified NPC.", "COLORS: red, dark_red, blue, dark_blue, aqua, dark_aqua, dark_purple, light_purple, black, white, yellow, gold, gray, dark_gray, green and dark_green"})
@@ -25,7 +26,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprNPCGlowColor extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprNPCGlowColor.class, String.class, ExpressionType.COMBINED, "glow[ing] color of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCGlowColor.class, String.class, ExpressionType.COMBINED, "glow[ing] color of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

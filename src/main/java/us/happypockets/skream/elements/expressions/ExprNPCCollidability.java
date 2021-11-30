@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Collidability of NPC")
 @Description({"Sets/gets the collidability of the specified npc."})
@@ -23,7 +24,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprNPCCollidability extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprNPCCollidability.class, Boolean.class, ExpressionType.COMBINED, "collidability of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCCollidability.class, Boolean.class, ExpressionType.COMBINED, "collidability of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

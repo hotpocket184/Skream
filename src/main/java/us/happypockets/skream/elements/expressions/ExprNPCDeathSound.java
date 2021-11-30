@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 import us.happypockets.skream.util.ScrubNPCSound;
 
 @Name("Death Sound of NPC")
@@ -24,7 +25,10 @@ import us.happypockets.skream.util.ScrubNPCSound;
 public class ExprNPCDeathSound extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprNPCDeathSound.class, String.class, ExpressionType.COMBINED, "deathsound of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCDeathSound.class, String.class, ExpressionType.COMBINED, "deathsound of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

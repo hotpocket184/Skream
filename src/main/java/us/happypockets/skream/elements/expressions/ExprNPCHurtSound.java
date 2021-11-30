@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 import us.happypockets.skream.util.ScrubNPCSound;
 
 @Name("Hurt Sound of NPC")
@@ -24,7 +25,10 @@ import us.happypockets.skream.util.ScrubNPCSound;
 public class ExprNPCHurtSound extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprNPCHurtSound.class, String.class, ExpressionType.COMBINED, "hurtsound of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCHurtSound.class, String.class, ExpressionType.COMBINED, "hurtsound of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

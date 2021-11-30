@@ -11,6 +11,8 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.elements.conditions.CondIsNPC;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Cancel NPC Pathfinding")
 @Description({"Stops the NPC from completing its pathfinding goal.", "NOTE: This can also be used to stop an NPC from attacking."})
@@ -21,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffCancelNPCPath extends Effect {
 
     static {
-        Skript.registerEffect(EffCancelNPCPath.class, "(cancel|delete) (path[ |-]finding|[the ]path) for npc %integers%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffCancelNPCPath.class, "(cancel|delete) (path[ |-]finding|[the ]path) for npc %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

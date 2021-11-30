@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Make NPC Pathfind")
 @Description({"Makes the specified NPC start pathfinding to the specified location.", "NOTE: If the NPC is unable to naturally walk to the location, it will teleport!"})
@@ -22,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCPath extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCPath.class, "make npc %integers% path[ |-]find to [the] [location [at]] %location% [with speed %number%]");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffNPCPath.class, "make npc %integers% path[ |-]find to [the] [location [at]] %location% [with speed %number%]");
+        }
+
     }
 
     private Expression<Integer> id;

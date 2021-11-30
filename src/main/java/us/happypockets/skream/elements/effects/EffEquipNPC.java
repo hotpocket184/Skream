@@ -13,6 +13,7 @@ import net.citizensnpcs.api.trait.trait.Equipment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Equip NPC")
 @Description({"Allows you to equip an npc with an itemstack. This is used for armor."})
@@ -23,7 +24,9 @@ import org.jetbrains.annotations.Nullable;
 public class EffEquipNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffEquipNPC.class, "equip npc %integers% with %itemstack%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffEquipNPC.class, "equip npc %integers% with %itemstack%");
+        }
     }
 
     private Expression<Integer> id;

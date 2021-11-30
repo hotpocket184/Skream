@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Make NPC Attack")
 @Description({"Makes the npc start pathfinding to the specified livingentity & start attacking when they get close enough.", "NOTE: You can stop this from occurring by using the CancelNPCPath effect."})
@@ -22,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCAttack extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCAttack.class, "make npc %integers% (hit|attack) %livingentity%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffNPCAttack.class, "make npc %integers% (hit|attack) %livingentity%");
+        }
+
     }
 
     private Expression<Integer> id;

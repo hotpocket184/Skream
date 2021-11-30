@@ -11,6 +11,7 @@ import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Last Spawned NPC")
 @Description({"Returns the id of the last spawned npc (that was spawned via this addon)"})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprLastNPC extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprLastNPC.class, Integer.class, ExpressionType.COMBINED, "[id of] last (created|spawned) npc");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprLastNPC.class, Integer.class, ExpressionType.COMBINED, "[id of] last (created|spawned) npc");
+        }
+
     }
 
     public static NPC lastNPCCreated;

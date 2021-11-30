@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Respawn NPC")
 @Description({"Respawns an npc at the specified location if it has been despawned (see Despawn NPC effect)."})
@@ -22,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffRespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffRespawnNPC.class, "respawn npc %integers% at %location%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffRespawnNPC.class, "respawn npc %integers% at %location%");
+        }
+
     }
 
     private Expression<Integer> id;

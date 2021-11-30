@@ -18,6 +18,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import us.happypockets.skream.elements.expressions.ExprLastNPC;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Spawn NPC")
 @Description({"Creates an npc with the specified name and spawns it at the specified location as the specified type if it is set (default type is a player)."})
@@ -34,7 +35,10 @@ public class EffSpawnNPC extends Effect {
             if (c != null)
                 CACHE.put(EntityData.fromClass(c), e); // Cache Skript EntityData -> Bukkit EntityType
         }
-        Skript.registerEffect(EffSpawnNPC.class, "(spawn|create) [a] npc named %string% at %location% as %entitydata%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffSpawnNPC.class, "(spawn|create) [a] npc named %string% at %location% as %entitydata%");
+        }
+
     }
 
     private Expression<String> name;

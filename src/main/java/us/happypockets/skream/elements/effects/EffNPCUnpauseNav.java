@@ -11,6 +11,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Unpause NPC Pathfinding")
 @Description({"Unpauses the NPC and allows them to complete any previously assigned pathfinding tasks."})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCUnpauseNav extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCUnpauseNav.class, "(un[ |-]pause|continue) (navigation|path[ |-]finding) for npc %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffNPCUnpauseNav.class, "(un[ |-]pause|continue) (navigation|path[ |-]finding) for npc %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

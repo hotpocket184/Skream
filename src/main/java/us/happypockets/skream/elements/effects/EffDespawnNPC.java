@@ -11,6 +11,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Despawn NPC")
 @Description({"Removes the specified NPC from the world (doesn't delete data completely) but allows it to be respawned if needed (See Respawn NPC effect)"})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffDespawnNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDespawnNPC.class, "de[ |-]spawn npc %integers%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffDespawnNPC.class, "de[ |-]spawn npc %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

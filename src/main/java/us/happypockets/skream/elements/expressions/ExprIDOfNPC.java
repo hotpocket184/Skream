@@ -11,6 +11,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("NPC Id of Entity")
 @Description({"Returns the id of the specified entity if they are an npc."})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprIDOfNPC extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprIDOfNPC.class, Integer.class, ExpressionType.COMBINED, "npc id of %entity%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprIDOfNPC.class, Integer.class, ExpressionType.COMBINED, "npc id of %entity%");
+        }
+
     }
 
     private Expression<Entity> entities;

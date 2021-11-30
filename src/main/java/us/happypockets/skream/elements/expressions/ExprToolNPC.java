@@ -15,6 +15,7 @@ import net.citizensnpcs.api.trait.trait.Equipment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Tool/Held Item of NPC")
 @Description({"Sets/gets the npc's held item (main hand)."})
@@ -25,7 +26,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprToolNPC extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprToolNPC.class, ItemStack.class, ExpressionType.COMBINED, "(tool|held item) of npc %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprToolNPC.class, ItemStack.class, ExpressionType.COMBINED, "(tool|held item) of npc %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

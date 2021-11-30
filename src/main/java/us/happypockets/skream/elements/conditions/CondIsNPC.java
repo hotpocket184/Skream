@@ -13,6 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @SuppressWarnings("null")
 @Name("Is NPC")
@@ -23,7 +24,10 @@ import org.jetbrains.annotations.Nullable;
 public class CondIsNPC extends Condition {
 
     static {
-        Skript.registerCondition(CondIsNPC.class, "%entity% (1¦is|2¦is(n't| not)) [a] npc");
+        if(Citizens.hasCitizens()){
+            Skript.registerCondition(CondIsNPC.class, "%entity% (1¦is|2¦is(n't| not)) [a] npc");
+        }
+
     }
 
     Expression<Entity> entity;

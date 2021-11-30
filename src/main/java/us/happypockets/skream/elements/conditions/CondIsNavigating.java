@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.event.Event;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("NPC Is Navigating")
 @Description({"Checks if an npc is pathfinding/navigating."})
@@ -22,7 +23,9 @@ import org.jetbrains.annotations.Nullable;
 public class CondIsNavigating extends Condition {
 
     static {
-        Skript.registerCondition(CondIsNavigating.class, "npc %integer% (1¦is|2¦is(n't| not)) (navigating|pathfinding)");
+        if(Citizens.hasCitizens()){
+            Skript.registerCondition(CondIsNavigating.class, "npc %integer% (1¦is|2¦is(n't| not)) (navigating|pathfinding)");
+        }
     }
 
     Expression<Integer> id;

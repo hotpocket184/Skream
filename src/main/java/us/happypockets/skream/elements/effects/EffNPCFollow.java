@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Make NPC Follow")
 @Description({"Makes the npc continuously pathfind (follow) to the specified livingentity.", "NOTE: You can stop this from occurring by using the CancelNPCPath effect."})
@@ -22,7 +23,9 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCFollow extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCFollow.class, "make npc %integers% follow %livingentity% [with speed %number%]");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffNPCFollow.class, "make npc %integers% follow %livingentity% [with speed %number%]");
+        }
     }
 
     private Expression<Integer> id;

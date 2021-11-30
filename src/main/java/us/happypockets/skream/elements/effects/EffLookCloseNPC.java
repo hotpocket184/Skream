@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.trait.LookClose;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Lookclose trait of NPC")
 @Description({"Allows you to set the lookclose trait of the specified npc to true/false"})
@@ -22,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffLookCloseNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffLookCloseNPC.class, "set look[ |-]close trait of npc %integers% to %boolean%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffLookCloseNPC.class, "set look[ |-]close trait of npc %integers% to %boolean%");
+        }
+
     }
 
     private Expression<Integer> id;

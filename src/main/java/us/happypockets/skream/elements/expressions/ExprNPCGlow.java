@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Glowing of NPC")
 @Description({"Sets/gets the glowing state of the specified npc."})
@@ -23,7 +24,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprNPCGlow extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprNPCGlow.class, Boolean.class, ExpressionType.COMBINED, "glowing of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCGlow.class, Boolean.class, ExpressionType.COMBINED, "glowing of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

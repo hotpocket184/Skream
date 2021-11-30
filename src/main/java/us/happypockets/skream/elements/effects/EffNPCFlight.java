@@ -11,6 +11,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("NPC Flight")
 @Description({"Allows you to set the flight mode of the specified npc to false/true"})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCFlight extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCFlight.class, "set flight [mode] of npc %integer% to %boolean%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffNPCFlight.class, "set flight [mode] of npc %integer% to %boolean%");
+        }
+
     }
 
     private Expression<Integer> id;

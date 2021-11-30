@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Name of NPC")
 @Description({"Sets/gets the name of the specified npc."})
@@ -23,7 +24,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprNPCName extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprNPCName.class, String.class, ExpressionType.COMBINED, "name of npc [with] [the] [id] %integer%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCName.class, String.class, ExpressionType.COMBINED, "name of npc [with] [the] [id] %integer%");
+        }
+
     }
 
     private Expression<Integer> id;

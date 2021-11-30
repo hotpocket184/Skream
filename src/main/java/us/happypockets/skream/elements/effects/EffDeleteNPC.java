@@ -11,6 +11,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Delete NPC")
 @Description({"Deletes an NPC's data and completely removes it from the server."})
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffDeleteNPC extends Effect {
 
     static {
-        Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc %integers%");
+        if(Citizens.hasCitizens()){
+            Skript.registerEffect(EffDeleteNPC.class, "(delete|destroy) npc %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

@@ -8,9 +8,12 @@ import ch.njol.skript.doc.RequiredPlugins;
 import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
+import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("On NPC Spawn")
 @Description({"Checks when an npc spawns.", "NOTE: This includes respawning."})
@@ -20,22 +23,25 @@ import org.jetbrains.annotations.Nullable;
 public abstract class EvntNPCSpawn extends SimpleEvent {
 
     static {
-        Skript.registerEvent("NPC Spawn", SimpleEvent.class, NPCSpawnEvent.class, "npc spawn");
-        EventValues.registerEventValue(NPCSpawnEvent.class, Integer.class, new Getter<Integer, NPCSpawnEvent>() {
-            @Override
-            @Nullable
-            public Integer get(NPCSpawnEvent e) {
-                return e.getNPC().getId();
-            }
+        if(Citizens.hasCitizens()) {
+            Skript.registerEvent("NPC Spawn", SimpleEvent.class, NPCSpawnEvent.class, "npc spawn");
+            EventValues.registerEventValue(NPCSpawnEvent.class, Integer.class, new Getter<Integer, NPCSpawnEvent>() {
+                @Override
+                @Nullable
+                public Integer get(NPCSpawnEvent e) {
+                    return e.getNPC().getId();
+                }
 
-        }, 0);
-        EventValues.registerEventValue(NPCSpawnEvent.class, Location.class, new Getter<Location, NPCSpawnEvent>() {
-            @Override
-            @Nullable
-            public Location get(NPCSpawnEvent e) {
-                return e.getLocation();
-            }
+            }, 0);
+            EventValues.registerEventValue(NPCSpawnEvent.class, Location.class, new Getter<Location, NPCSpawnEvent>() {
+                @Override
+                @Nullable
+                public Location get(NPCSpawnEvent e) {
+                    return e.getLocation();
+                }
 
-        }, 0);
+            }, 0);
+        }
+
     }
 }

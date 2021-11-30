@@ -13,6 +13,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Silent State of NPC")
 @Description({"Sets/gets the silent state of the specified NPC."})
@@ -23,7 +24,10 @@ import org.jetbrains.annotations.Nullable;
 public class ExprNPCSilent extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprNPCSilent.class, Boolean.class, ExpressionType.COMBINED, "silent state of npc [with] [the] [id] %integers%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprNPCSilent.class, Boolean.class, ExpressionType.COMBINED, "silent state of npc [with] [the] [id] %integers%");
+        }
+
     }
 
     private Expression<Integer> id;

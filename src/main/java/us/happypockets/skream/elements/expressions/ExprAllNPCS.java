@@ -5,12 +5,18 @@ import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.lang.util.SimpleExpression;
+import ch.njol.skript.registrations.EventValues;
+import ch.njol.skript.util.Getter;
 import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 import java.util.ArrayList;
 
@@ -23,7 +29,10 @@ import java.util.ArrayList;
 public class ExprAllNPCS extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprAllNPCS.class, Integer.class, ExpressionType.COMBINED, "[all] npcs");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprAllNPCS.class, Integer.class, ExpressionType.COMBINED, "[all] npcs");
+        }
+
     }
 
     @Override

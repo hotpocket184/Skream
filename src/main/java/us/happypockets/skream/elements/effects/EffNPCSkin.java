@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("NPC Skin")
 @Description({"Allows you to set the skin of the specified npc to the specified player's name (the string value).", "NOTE: This only works if the npc's type is a player!"})
@@ -22,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffNPCSkin extends Effect {
 
     static {
-        Skript.registerEffect(EffNPCSkin.class, "set skin of npc %integer% to %string%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerEffect(EffNPCSkin.class, "set skin of npc %integer% to %string%");
+        }
+
     }
 
     private Expression<Integer> id;

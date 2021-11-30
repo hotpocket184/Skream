@@ -15,6 +15,7 @@ import net.citizensnpcs.api.trait.trait.Equipment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import us.happypockets.skream.util.Citizens;
 
 @Name("Offhand of NPC")
 @Description({"Sets/gets the item in the npc's offhand."})
@@ -25,7 +26,9 @@ import org.jetbrains.annotations.Nullable;
 public class ExprOffHandNPC extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprOffHandNPC.class, ItemStack.class, ExpressionType.COMBINED, "[item from [the]] off[ |-]hand [slot] of npc %integer%");
+        if(Citizens.hasCitizens()) {
+            Skript.registerExpression(ExprOffHandNPC.class, ItemStack.class, ExpressionType.COMBINED, "[item from [the]] off[ |-]hand [slot] of npc %integer%");
+        }
     }
 
     private Expression<Integer> id;
