@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EffSetDelay extends Effect {
     static {
-        Skript.registerEffect(EffSetDelay.class, "set delay of %blocks% to %integer%");
+        Skript.registerEffect(EffSetDelay.class, "set [spawn[ing]] delay of %blocks% to %integer%");
     }
 
     private Expression<Block> block;
