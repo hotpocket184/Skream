@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class CondInBubbleColumn extends Condition{
 
         static {
-            Skript.registerCondition(us.happypockets.skream.elements.conditions.CondInWater.class, "%entity% (1¦is|2¦is(n't| not)) in [a] [bubble] column");
+            Skript.registerCondition(CondInBubbleColumn.class, "%entity% (1¦is|2¦is(n't| not)) in [a] [bubble] column");
         }
 
         Expression<Entity> entity;

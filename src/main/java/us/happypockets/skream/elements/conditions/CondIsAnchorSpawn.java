@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class CondIsAnchorSpawn extends Condition {
 
     static {
-        Skript.registerCondition(us.happypockets.skream.elements.conditions.CondInWater.class, "[the] respawn location (1¦is|2¦is(n't| not)) (a|an) [respawn] anchor");
+        Skript.registerCondition(CondIsAnchorSpawn.class, "[the] respawn location (1¦is|2¦is(n't| not)) (a|an) [respawn] anchor");
     }
 
     Expression<Player> player;
