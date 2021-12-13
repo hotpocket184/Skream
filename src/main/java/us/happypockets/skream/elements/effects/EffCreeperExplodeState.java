@@ -22,46 +22,55 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Name("Stop Horse Kick")
-@Description({"Makes the specified horse stop doing any animation (even if they're not currently doing the kick animation) for the specified players (through packets)."})
-@Examples({"stop horse kick from target for player"})
+@Name("Make Horse Kick")
+@Description({"Makes the specified horse do the kicking animation for the specified players (through packets).", "NOTE: You can stop this from occurring by using the StopHorseKick effect."})
+@Examples({"make horse target kick for player"})
 @Since("1.1")
 @RequiredPlugins("ProtocolLib")
 
-public class EffStopHorseKick extends Effect {
+public class EffCreeperExplodeState extends Effect {
     static{
         PluginManager pm = Bukkit.getServer().getPluginManager();
         Plugin protocollib = pm.getPlugin("ProtocolLib");
         if(protocollib.isEnabled()){
-            Skript.registerEffect(EffStopHorseKick.class, "stop horse kick[ing] from %livingentity% for %players%");
+            Skript.registerEffect(EffCreeperExplodeState.class, "set [creeper] explo(de|sion) state of %livingentity% to %boolean% for %players%");
         }
     }
 
-    private Expression<LivingEntity> horse;
+    private Expression<LivingEntity> creeper;
     private Expression<Player> players;
+    private Expression<Boolean> bool;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
-        this.horse = (Expression<LivingEntity>) expressions[0];
-        this.players = (Expression<Player>) expressions[1];
+        this.creeper = (Expression<LivingEntity>) expressions[0];
+        this.bool = (Expression<Boolean>) expressions[1];
+        this.players = (Expression<Player>) expressions[2];
         return true;
     }
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Stop Horse Kick effect with expression livingentity: " + horse.toString(event, debug) +  " and expression players " + players.toString(event, debug);
+        return "Creeper Explode State effect with expression livingentity: " + creeper.toString(event, debug) + ", expression players: " + players.toString(event, debug) + " and expression boolean: " + bool.toString(event, debug);
     }
 
     @Override
     protected void execute(Event event) {
-        LivingEntity ent = horse.getSingle(event);
+        LivingEntity ent = creeper.getSingle(event);
+        Integer val;
         if(ent == null){return;}
-        if(ent.getType().equals(EntityType.HORSE) || ent.getType().equals(EntityType.SKELETON_HORSE) || ent.getType().equals(EntityType.ZOMBIE_HORSE)){
+        if(ent.getType().equals(EntityType.CREEPER)){
+            if(bool.getSingle(event).equals(true)){
+                val = 1;
+            }
+            else{
+                val = -1;
+            }
             ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
             PacketContainer packetContainer = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
             WrappedDataWatcher watcher = new WrappedDataWatcher(ent);
-            watcher.setObject(new WrappedDataWatcher.WrappedDataWatcherObject(17,WrappedDataWatcher.Registry.get(Byte.class)), (byte) 0);
+            watcher.setObject(new WrappedDataWatcher.WrappedDataWatcherObject(16,WrappedDataWatcher.Registry.get(Integer.class)), val);
             packetContainer.getEntityModifier(ent.getWorld()).write(0, ent);
             packetContainer.getWatchableCollectionModifier().write(0, watcher.getWatchableObjects());
             for(Player p : players.getAll(event)){
@@ -73,7 +82,7 @@ public class EffStopHorseKick extends Effect {
             }
         }
         else{
-            Skript.error("You may only use the StopHorseKick effect with horses (Zombie, Skeleton, or regular)");
+            Skript.error("You may only use the CreeperExplodeState effect with creepers.");
         }
 
     }

@@ -60,9 +60,9 @@ public class EffMakeHorseKick extends Effect {
         if(ent.getType().equals(EntityType.HORSE) || ent.getType().equals(EntityType.SKELETON_HORSE) || ent.getType().equals(EntityType.ZOMBIE_HORSE)){
             ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
             PacketContainer packetContainer = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
-            WrappedDataWatcher watcher = new WrappedDataWatcher(horse.getSingle(event));
+            WrappedDataWatcher watcher = new WrappedDataWatcher(ent);
             watcher.setObject(new WrappedDataWatcher.WrappedDataWatcherObject(17,WrappedDataWatcher.Registry.get(Byte.class)), (byte) 32);
-            packetContainer.getEntityModifier(horse.getSingle(event).getWorld()).write(0, horse.getSingle(event));
+            packetContainer.getEntityModifier(ent.getWorld()).write(0, ent);
             packetContainer.getWatchableCollectionModifier().write(0, watcher.getWatchableObjects());
             for(Player p : players.getAll(event)){
                 try {
