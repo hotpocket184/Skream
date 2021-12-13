@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+
 public class ExprDomestication extends SimpleExpression<Integer> {
     static {
         Skript.registerExpression(ExprDomestication.class, Integer.class, ExpressionType.COMBINED, "(temper|domestication) [level] of %livingentities%");
@@ -46,25 +48,33 @@ public class ExprDomestication extends SimpleExpression<Integer> {
     @Override
     @Nullable
     protected Integer[] get(Event event) {
-        Integer[] ints;
+        int i = 0;
+        ArrayList<Integer> ints = new ArrayList<>();
         for(LivingEntity h : horse.getAll(event)) {
             if(h != null) {
                 if(h.getType().equals(EntityType.HORSE) || h.getType().equals(EntityType.SKELETON_HORSE) || h.getType().equals(EntityType.ZOMBIE_HORSE)) {
                     Horse theHorse = (Horse) horse.getSingle(event);
-                    return new Integer[]{theHorse.getDomestication()};
+                    ints.add(theHorse.getDomestication());
                 }else{
-                    Skript.error("You may only use the SetDomestication effect with horses (Zombie, Skeleton, or Regular).");
+                    i = i + 1;
                 }
             }
         }
-        return null;
+        if(i > 0){
+            Skript.error("You may only use the SetDomestication effect with horses (Zombie, Skeleton, or Regular).");
+        }
+        return ints.toArray(new Integer[0]);
     }
     @Override
     public void change(Event event, Object[] delta, Changer.ChangeMode mode){
         if(horse != null){
-                if(mode == Changer.ChangeMode.SET) {
-                    Horse theHorse = (Horse) horse.getSingle(event);
+            if(mode == Changer.ChangeMode.SET) {
+                for(LivingEntity e : horse.getAll(event)){
+                    Horse h = (Horse) e;
                     Integer x = ((Integer) delta[0]);
+                    h.setDomestication(x);
+                }
+                    
             }
         }
     }
@@ -72,7 +82,7 @@ public class ExprDomestication extends SimpleExpression<Integer> {
     @Override
     public Class<?>[] acceptChange(final Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
+            return CollectionUtils.array(Integer.class);
         }
         return null;
     }
