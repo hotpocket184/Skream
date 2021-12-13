@@ -19,13 +19,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-@Name("Domestication")
+@Name("Max Domestication")
 @Description({"Sets/gets the domestication (temper) of a horse, skeleton horse, or zombie horse."})
-@Examples("broadcast \"Entity's Domestication Level: %domestication level of event-entity%\"")
+@Examples("set the max domestication level of event-entity to 5")
 
-public class ExprDomestication extends SimpleExpression<Integer> {
+public class ExprMaxDomestication extends SimpleExpression<Integer> {
+
     static {
-        Skript.registerExpression(ExprDomestication.class, Integer.class, ExpressionType.COMBINED, "[the] (temper|domestication) [level] of %livingentities%");
+        Skript.registerExpression(ExprMaxDomestication.class, Integer.class, ExpressionType.COMBINED, "[the] max (temper|domestication) [level] of %livingentities%");
     }
 
     private Expression<LivingEntity> horse;
@@ -48,7 +49,7 @@ public class ExprDomestication extends SimpleExpression<Integer> {
 
     @Override
     public String toString(@Nullable Event event, boolean debug) {
-        return "Domestication level expression with expression livingentity: " + horse.toString(event, debug);
+        return "Max domestication level expression with expression livingentity: " + horse.toString(event, debug);
     }
 
     @Override
@@ -60,14 +61,14 @@ public class ExprDomestication extends SimpleExpression<Integer> {
             if(h != null) {
                 if(h.getType().equals(EntityType.HORSE) || h.getType().equals(EntityType.SKELETON_HORSE) || h.getType().equals(EntityType.ZOMBIE_HORSE)) {
                     Horse theHorse = (Horse) horse.getSingle(event);
-                    ints.add(theHorse.getDomestication());
+                    ints.add(theHorse.getMaxDomestication());
                 }else{
                     i = i + 1;
                 }
             }
         }
         if(i > 0){
-            Skript.error("You may only use the SetDomestication effect with horses (Zombie, Skeleton, or Regular).");
+            Skript.error("You may only use the SetMaxDomestication effect with horses (Zombie, Skeleton, or Regular).");
         }
         return ints.toArray(new Integer[0]);
     }
@@ -78,9 +79,9 @@ public class ExprDomestication extends SimpleExpression<Integer> {
                 for(LivingEntity e : horse.getAll(event)){
                     Horse h = (Horse) e;
                     Integer x = ((Integer) delta[0]);
-                    h.setDomestication(x);
+                    h.setMaxDomestication(x);
                 }
-                    
+
             }
         }
     }
